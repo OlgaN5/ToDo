@@ -1,0 +1,33 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlgaN5/ToDo.git"
+  },
+  "author": "Olya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlgaN5/ToDo/issues"
+  },
+  "homepage": "https://github.com/OlgaN5/ToDo#readme",
+  "dependencies": {
+    "@sentry/node": "^7.64.0",
+    "@sentry/tracing": "^7.64.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.1",
+    "nodemon": "^3.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.0"
+  }
+}
