@@ -33,7 +33,7 @@ const swaggerOptions = {
         },
     },
 
-    apis: ['./routes/register.routes.js','./routes/login.routes.js','./routes/task.routes.js']
+    apis: ['./routes/*.js']
 }
 
 app.use(Sentry.Handlers.requestHandler())
