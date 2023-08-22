@@ -32,7 +32,6 @@ const swaggerOptions = {
             }
         },
     },
-
     apis: ['./routes/*.js']
 }
 
@@ -47,3 +46,38 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 Sentry.init({
     dsn: process.env.DSN
 });
+
+module.exports = app
+
+
+
+
+
+
+
+// app.use(
+//     cors({
+//         origin: 'http://example.com', // Allow requests from this origin
+//         methods: ['GET', 'POST'], // Allow specified HTTP methods
+//     })
+// );
+// app.get('/secret', (req, res) => {
+//     const secret = Math.floor(Math.random() * 100)
+//     res.json({
+//         secret
+//     })
+// });
+
+// _________________________________________________________
+
+// let corsOptions = {
+//     origin: ['http://example.com'],
+// }
+// app.use(cors(corsOptions))
+
+// app.get('/secret', cors(corsOptions), (req, res) => {
+//     const secret = Math.floor(Math.random() * 100)
+//     res.json({
+//         secret
+//     })
+// });

@@ -49,12 +49,15 @@ const validation = [
 router.post('/', validation, async (req, res) => {
     try {
         const result = validationResult(req)
+        console.log(result)
         if (result.isEmpty()) {
             const user = await registerControllers.register(req.body)
+            console.log(user)
             res.send(user)
         } else {
+            console.log('TYUIOIUYGFDFGHJKJHGF')
             res.send({
-                errors: result.array
+                errors: result.array()
             })
         }
     } catch (e) {
