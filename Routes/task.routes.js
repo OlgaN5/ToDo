@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const taskController = require('../Controllers/task.controllers')
-const jwt = require('jsonwebtoken')
 const Sentry = require('@sentry/node')
 const {
     body,
@@ -9,6 +8,7 @@ const {
     header,
     validationResult
 } = require('express-validator')
+const authenticateToken = require('../Utils/Authenticate')
 
 const validationBody = [
     body('title').notEmpty().escape().isString().trim(),
@@ -22,22 +22,22 @@ const validationHeader = [
     header('authorization').notEmpty()
 ]
 
-const authenficateToken = (req, res, next) => {
-    try {
-        const authHeader = req.headers.authorization
-        const token = authHeader?.split(' ')[1]
-        if (!token) res.sendStatus(401)
-        jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
-            if (err) throw new Error('token is invalid')
-            req.idUser = id
-            next()
-        })
-    } catch (e) {
-        Sentry.captureException(e)
-        res.sendStatus(403)
-    }
+// const authenficateToken = (req, res, next) => {
+//     try {
+//         const authHeader = req.headers.authorization
+//         const token = authHeader?.split(' ')[1]
+//         if (!token) res.sendStatus(401)
+//         jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
+//             if (err) throw new Error('token is invalid')
+//             req.idUser = id
+//             next()
+//         })
+//     } catch (e) {
+//         Sentry.captureException(e)
+//         res.sendStatus(403)
+//     }
 
-}
+// }
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ const authenficateToken = (req, res, next) => {
  *         description: Unauthorized
  */
 //get tasks
-router.get('/', validationHeader, authenficateToken, async (req, res) => {
+router.get('/', validationHeader, authenticateToken, async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
@@ -103,7 +103,7 @@ router.get('/', validationHeader, authenficateToken, async (req, res) => {
  *         description: Unauthorized
  */
 //add task
-router.post('/add', validationHeader, authenficateToken, validationBody, async (req, res) => {
+router.post('/add', validationHeader, authenticateToken, validationBody, async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
@@ -151,7 +151,7 @@ router.post('/add', validationHeader, authenficateToken, validationBody, async (
  *         description: Unauthorized
  */
 //change title
-router.patch('/:id', validationHeader, authenficateToken, body('title').notEmpty().escape().trim(), async (req, res) => {
+router.patch('/:id', validationHeader, authenticateToken, body('title').notEmpty().escape().trim(), async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
@@ -199,11 +199,12 @@ router.patch('/:id', validationHeader, authenficateToken, body('title').notEmpty
  *         description: Unauthorized
  */
 //change isCompleted
-router.patch('/:id/isCompleted', validationHeader, authenficateToken, body('isCompleted').notEmpty().isBoolean(), async (req, res) => {
+router.patch('/:id/isCompleted', validationHeader, authenticateToken, body('isCompleted').notEmpty().isBoolean(), async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
-            const task = await taskController.changeisCompleted(req.params.id, req.body.isComplited)
+            console.log(req.body)
+            const task = await taskController.changeisCompleted(req.params.id, req.body.isCompleted)
             res.send(task)
         } else {
             res.send({
@@ -237,7 +238,7 @@ router.patch('/:id/isCompleted', validationHeader, authenficateToken, body('isCo
  */
 
 //delete task
-router.delete('/:id', validationHeader, authenficateToken, validationParam, async (req, res) => {
+router.delete('/:id', validationHeader, authenticateToken, validationParam, async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {

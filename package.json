@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "testregister" : "mocha ./Tests/register.js"    ,
-    "testlogin" : "mocha ./Tests/login.js"    
+    "testlogin" : "mocha ./Tests/login.js",
+    "testtask" : "mocha ./Tests/task.test.js"    
   },
   "repository": {
     "type": "git",

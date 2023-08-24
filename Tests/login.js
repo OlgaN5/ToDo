@@ -12,14 +12,48 @@ describe('post /api/login/', () => {
             password: 'testPassword'
         }
         chai.request(app)
-        .post('/api/login/')
-        .send(user)
-        .end((err,res) => {
-            res.should.have.status(200)
-            console.log(err)
-            // expect(typeof res.body).to.equal('string')
-            // res.text.should.be.a('string')
-            done()            
-        })
+            .post('/api/login/')
+            .send(user)
+            .end((err, res) => {
+                res.should.have.status(200)
+                res.body.should.have.property('token')
+                done()
+            })
+    })
+    it('it should not login user', () => {
+        const user = {
+            login: 'testLogin',
+            password: 'testPassword'
+        }
+        chai.request(app)
+            .post('/api/logins/')
+            .send(user)
+            .end((err, res) => {
+                res.should.have.status(404)
+            })
+    })
+    it('it should not login user', () => {
+        const user = {
+            login: '',
+            password: 'testPassword'
+        }
+        chai.request(app)
+            .post('/api/login/')
+            .send(user)
+            .end((err, res) => {
+                res.body.should.have.property('errors')
+            })
+    })
+    it('it should not login user', () => {
+        const user = {
+            login: 'hh',
+            password: 'testPassword'
+        }
+        chai.request(app)
+            .post('/api/login/')
+            .send(user)
+            .end((err, res) => {
+                res.text.should.include('token not received')
+            })
     })
 })

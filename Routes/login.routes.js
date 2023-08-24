@@ -43,8 +43,15 @@ router.post('/', validation, async (req, res) => {
         const result = validationResult(req)
         if (result.isEmpty()) {
             const token = await loginControllers.login(req.body)
-            console.log(token)
-            res.send(token)
+            if (token) {
+                console.log(token)
+                res.send({
+                    token
+                })
+            } else {
+                res.send('token not received')
+            }
+
         } else {
             res.send({
                 errors: result.array()

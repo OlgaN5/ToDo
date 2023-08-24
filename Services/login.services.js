@@ -1,10 +1,10 @@
-const fs = require('fs')
+// const fs = require('fs')
+const file = require('../Utils/fs')
 class LoginServices {
-    getUser(login) {
-        const data = fs.readFileSync('./users.json')
-        const users = JSON.parse(data)
-        const user = users.find(item => item.login === login)
-        return new Promise(res => res(user))
+    async getUser(login) {
+        const users = await file.readFile('./users.json')
+        const user = await users.find(item => item.login === login)
+        return user
     }
 }
 module.exports = new LoginServices()

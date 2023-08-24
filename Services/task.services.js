@@ -1,50 +1,52 @@
-const fs = require('fs')
+const file = require('../Utils/fs')
+const helper = require('../Helpers/helper')
 const {
     v4
 } = require('uuid')
 class TaskService {
-    checkIdUser(idUser) {
-        const data = fs.readFileSync('./tasks.json', 'utf8')
-        const tasks = JSON.parse(data)
-        return new Promise(res => res(tasks.some(item => item.idUser === idUser)))
+    async checkTaskParameters(parameter, parameterValue) {
+        const tasks = await file.readFile('./tasks.json')
+        return helper.checkParameters(tasks, parameter, parameterValue)
     }
-    getTasks(idUser) {
-        const data = fs.readFileSync('./tasks.json', 'utf8')
-        const tasks = JSON.parse(data)
-        return new Promise(res => res(tasks.filter(item => item.idUser === idUser)))
+
+    // async checkIdUser(idUser) {
+    //     const tasks = file.readFile('./tasks.json')
+    //     return tasks.some(item => item.idUser === idUser)
+    // }
+    async getTasks(idUser) {
+        const tasks = await file.readFile('./tasks.json')
+        return tasks.filter(item => item.idUser === idUser)
     }
-    addTask(task) {
-        const data = fs.readFileSync('./tasks.json', 'utf8')
-        const tasks = JSON.parse(data)
+    async addTask(task) {
+        const tasks = await file.readFile('./tasks.json')
         task.id = v4()
         tasks.push(task)
-        fs.writeFileSync('./tasks.json', JSON.stringify(tasks))
-        return new Promise(res => res(task))
+        file.writeFile('./tasks.json', tasks)
+        return task
     }
-    changeTitle(id, title) {
-        const data = fs.readFileSync('./tasks.json', 'utf8')
-        const tasks = JSON.parse(data)
+    async changeTitle(id, title) {
+        const tasks = await file.readFile('./tasks.json')
         const task = tasks.find(item => item.id === id)
         task.title = title
-        fs.writeFileSync('./tasks.json', JSON.stringify(tasks))
-        return new Promise(res => res(task))
+        file.writeFile('./tasks.json', tasks)
+        return task
     }
-    changeisCompleted(id, isCompleted) {
-        const data = fs.readFileSync('./tasks.json', 'utf8')
-        const tasks = JSON.parse(data)
+    async changeisCompleted(id, isCompleted) {
+        const tasks = await file.readFile('./tasks.json')
         const task = tasks.find(item => item.id === id)
+       
         task.isCompleted = isCompleted
-        fs.writeFileSync('./tasks.json', JSON.stringify(tasks))
-        return new Promise(res => res(task))
+        console.log(task)
+        file.writeFile('./tasks.json', tasks)
+        return task
     }
-    deleteTask(id){
-        const data = fs.readFileSync('./tasks.json', 'utf8')
-        const tasks = JSON.parse(data)
+    async deleteTask(id) {
+        const tasks = await file.readFile('./tasks.json')
         const taskIndex = tasks.findIndex(item => item.id === id)
         const deletedTask = tasks[taskIndex]
-        tasks.splice(taskIndex,1)
-        fs.writeFileSync('./tasks.json', JSON.stringify(tasks))
-        return new Promise(res => res(deletedTask))
+        tasks.splice(taskIndex, 1)
+        file.writeFile('./tasks.json', tasks)
+        return deletedTask
     }
 }
 module.exports = new TaskService()
