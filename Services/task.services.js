@@ -5,48 +5,33 @@ const {
 } = require('uuid')
 class TaskService {
     async checkTaskParameters(parameter, parameterValue) {
-        const tasks = await file.readFile('./tasks.json')
-        return helper.checkParameters(tasks, parameter, parameterValue)
+        return helper.checkParameters('./tasks.json', parameter, parameterValue)
     }
-
-    // async checkIdUser(idUser) {
-    //     const tasks = file.readFile('./tasks.json')
-    //     return tasks.some(item => item.idUser === idUser)
-    // }
     async getTasks(idUser) {
         const tasks = await file.readFile('./tasks.json')
         return tasks.filter(item => item.idUser === idUser)
     }
     async addTask(task) {
-        const tasks = await file.readFile('./tasks.json')
         task.id = v4()
-        tasks.push(task)
-        file.writeFile('./tasks.json', tasks)
+        await helper.pushInSource('./tasks.json', task)
         return task
     }
-    async changeTitle(id, title) {
-        const tasks = await file.readFile('./tasks.json')
-        const task = tasks.find(item => item.id === id)
-        task.title = title
-        file.writeFile('./tasks.json', tasks)
-        return task
-    }
-    async changeisCompleted(id, isCompleted) {
-        const tasks = await file.readFile('./tasks.json')
-        const task = tasks.find(item => item.id === id)
-       
-        task.isCompleted = isCompleted
-        console.log(task)
-        file.writeFile('./tasks.json', tasks)
+    async changeParameterOfTask(id, parameter, parameterValue) {
+        const tasks = await file.readFile(path)
+        const task = tasks.find(item => item[parameter] === parameterValue)
+        // const task = helper.findByParameter('./tasks.json', 'id', id)
+        task[parameter] = parameterValue
+        file.writeFile('./tasks.json', tasks) //изза этого не могу заменить на helper.findByParameter(массив будет не доступен)
         return task
     }
     async deleteTask(id) {
-        const tasks = await file.readFile('./tasks.json')
-        const taskIndex = tasks.findIndex(item => item.id === id)
-        const deletedTask = tasks[taskIndex]
-        tasks.splice(taskIndex, 1)
-        file.writeFile('./tasks.json', tasks)
-        return deletedTask
+        // const tasks = await file.readFile('./tasks.json')
+        // const taskIndex = tasks.findIndex(item => item.id === id)
+        // const deletedTask = tasks[taskIndex]
+        // tasks.splice(taskIndex, 1)
+        // file.writeFile('./tasks.json', tasks)
+        // return deletedTask
+        return await helper.deleteElementById('./tasks.json', id)
     }
 }
 module.exports = new TaskService()

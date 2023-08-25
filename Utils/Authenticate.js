@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+const Sentry = require('@sentry/node')
 const authenticateToken = (req, res, next) => {
     try {
         const authHeader = req.headers.authorization

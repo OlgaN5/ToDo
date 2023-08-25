@@ -6,8 +6,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// const fs = require('fs')
-var file = require('../Utils/fs');
+var helper = require('../Helpers/helper');
 
 var LoginServices =
 /*#__PURE__*/
@@ -19,26 +18,19 @@ function () {
   _createClass(LoginServices, [{
     key: "getUser",
     value: function getUser(login) {
-      var users, user;
+      var user;
       return regeneratorRuntime.async(function getUser$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./users.json'));
+              return regeneratorRuntime.awrap(helper.findByParameter('./users.json', 'login', login));
 
             case 2:
-              users = _context.sent;
-              _context.next = 5;
-              return regeneratorRuntime.awrap(users.find(function (item) {
-                return item.login === login;
-              }));
-
-            case 5:
               user = _context.sent;
               return _context.abrupt("return", user);
 
-            case 7:
+            case 4:
             case "end":
               return _context.stop();
           }

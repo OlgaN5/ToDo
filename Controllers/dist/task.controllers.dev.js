@@ -79,7 +79,7 @@ function () {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return regeneratorRuntime.awrap(taskService.changeTitle(id, title));
+              return regeneratorRuntime.awrap(taskService.changeParameterOfTask(id, 'title', title));
 
             case 2:
               return _context3.abrupt("return", _context3.sent);
@@ -93,13 +93,13 @@ function () {
     }
   }, {
     key: "changeisCompleted",
-    value: function changeisCompleted(id, isComplited) {
+    value: function changeisCompleted(id, isCompleted) {
       return regeneratorRuntime.async(function changeisCompleted$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return regeneratorRuntime.awrap(taskService.changeisCompleted(id, isComplited));
+              return regeneratorRuntime.awrap(taskService.changeParameterOfTask(id, 'isCompleted', isCompleted));
 
             case 2:
               return _context4.abrupt("return", _context4.sent);

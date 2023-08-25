@@ -23,29 +23,19 @@ function () {
   _createClass(TaskService, [{
     key: "checkTaskParameters",
     value: function checkTaskParameters(parameter, parameterValue) {
-      var tasks;
       return regeneratorRuntime.async(function checkTaskParameters$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./tasks.json'));
+              return _context.abrupt("return", helper.checkParameters('./tasks.json', parameter, parameterValue));
 
-            case 2:
-              tasks = _context.sent;
-              return _context.abrupt("return", helper.checkParameters(tasks, parameter, parameterValue));
-
-            case 4:
+            case 1:
             case "end":
               return _context.stop();
           }
         }
       });
-    } // async checkIdUser(idUser) {
-    //     const tasks = file.readFile('./tasks.json')
-    //     return tasks.some(item => item.idUser === idUser)
-    // }
-
+    }
   }, {
     key: "getTasks",
     value: function getTasks(idUser) {
@@ -73,22 +63,18 @@ function () {
   }, {
     key: "addTask",
     value: function addTask(task) {
-      var tasks;
       return regeneratorRuntime.async(function addTask$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./tasks.json'));
-
-            case 2:
-              tasks = _context3.sent;
               task.id = v4();
-              tasks.push(task);
-              file.writeFile('./tasks.json', tasks);
+              _context3.next = 3;
+              return regeneratorRuntime.awrap(helper.pushInSource('./tasks.json', task));
+
+            case 3:
               return _context3.abrupt("return", task);
 
-            case 7:
+            case 4:
             case "end":
               return _context3.stop();
           }
@@ -96,23 +82,25 @@ function () {
       });
     }
   }, {
-    key: "changeTitle",
-    value: function changeTitle(id, title) {
+    key: "changeParameterOfTask",
+    value: function changeParameterOfTask(id, parameter, parameterValue) {
       var tasks, task;
-      return regeneratorRuntime.async(function changeTitle$(_context4) {
+      return regeneratorRuntime.async(function changeParameterOfTask$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./tasks.json'));
+              return regeneratorRuntime.awrap(file.readFile(path));
 
             case 2:
               tasks = _context4.sent;
               task = tasks.find(function (item) {
-                return item.id === id;
-              });
-              task.title = title;
-              file.writeFile('./tasks.json', tasks);
+                return item[parameter] === parameterValue;
+              }); // const task = helper.findByParameter('./tasks.json', 'id', id)
+
+              task[parameter] = parameterValue;
+              file.writeFile('./tasks.json', tasks); //изза этого не могу заменить на helper.findByParameter(массив будет не доступен)
+
               return _context4.abrupt("return", task);
 
             case 7:
@@ -123,57 +111,21 @@ function () {
       });
     }
   }, {
-    key: "changeisCompleted",
-    value: function changeisCompleted(id, isCompleted) {
-      var tasks, task;
-      return regeneratorRuntime.async(function changeisCompleted$(_context5) {
+    key: "deleteTask",
+    value: function deleteTask(id) {
+      return regeneratorRuntime.async(function deleteTask$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./tasks.json'));
+              return regeneratorRuntime.awrap(helper.deleteElementById('./tasks.json', id));
 
             case 2:
-              tasks = _context5.sent;
-              task = tasks.find(function (item) {
-                return item.id === id;
-              });
-              task.isCompleted = isCompleted;
-              console.log(task);
-              file.writeFile('./tasks.json', tasks);
-              return _context5.abrupt("return", task);
+              return _context5.abrupt("return", _context5.sent);
 
-            case 8:
+            case 3:
             case "end":
               return _context5.stop();
-          }
-        }
-      });
-    }
-  }, {
-    key: "deleteTask",
-    value: function deleteTask(id) {
-      var tasks, taskIndex, deletedTask;
-      return regeneratorRuntime.async(function deleteTask$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              _context6.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./tasks.json'));
-
-            case 2:
-              tasks = _context6.sent;
-              taskIndex = tasks.findIndex(function (item) {
-                return item.id === id;
-              });
-              deletedTask = tasks[taskIndex];
-              tasks.splice(taskIndex, 1);
-              file.writeFile('./tasks.json', tasks);
-              return _context6.abrupt("return", deletedTask);
-
-            case 8:
-            case "end":
-              return _context6.stop();
           }
         }
       });
