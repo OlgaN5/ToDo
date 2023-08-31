@@ -26,7 +26,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(helper.checkParameters('./users.json', parameter, parameterValue));
+              return regeneratorRuntime.awrap(helper.checkParameters('users', parameter, parameterValue));
 
             case 2:
               return _context.abrupt("return", _context.sent);
@@ -46,7 +46,7 @@ function () {
           switch (_context2.prev = _context2.next) {
             case 0:
               user.id = v4();
-              helper.pushInSource('./users.json', user);
+              helper.pushInSource('users', user);
               return _context2.abrupt("return", user);
 
             case 3:

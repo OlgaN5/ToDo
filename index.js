@@ -1,3 +1,4 @@
+
 const express = require('express')
 const Sentry = require('@sentry/node')
 const router = require('./Routes/index.routes')
@@ -81,3 +82,16 @@ module.exports = app
 //         secret
 //     })
 // });
+
+
+
+
+// const express = require('express')
+// const myApp = express()
+// const PORT = 3000
+
+// myApp.listen(PORT, () => console.log(`server started on port ${port}`))
+
+// myApp.get('/', (req, res) => {
+//     res.send('Hello World!')
+//   })

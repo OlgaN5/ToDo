@@ -1,7 +1,7 @@
 const helper = require('../Helpers/helper')
 class LoginServices {
     async getUser(login) {
-        const user = await helper.findByParameter('./users.json', 'login', login)
+        const user = await helper.findByParameter('users', 'login', login)
         return user
     }
 }

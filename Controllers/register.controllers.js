@@ -8,14 +8,17 @@ class RegisterControllers {
             login,
             password
         } = user
+        
         const isEmail = await registerServices.checkUserParameters('email', email)
         const isLogin = await registerServices.checkUserParameters('login', login)
+        
         if (isEmail) {
             return 'email is exist'
         }
         if (isLogin) {
             return 'login is exist'
         }
+       
         const hashedPassword = await bcrypt.hashSync(password, saltRounds)
         const createdUser = await registerServices.createUser({
             email,

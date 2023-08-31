@@ -4,11 +4,11 @@ const {
 const helper = require('../Helpers/helper')
 class RegisterServices {
     async checkUserParameters(parameter, parameterValue) {
-        return await helper.checkParameters('./users.json', parameter, parameterValue)
+        return await helper.checkParameters('users', parameter, parameterValue)
     }
     async createUser(user) {
         user.id = v4()
-        helper.pushInSource('./users.json', user)
+        helper.pushInSource('users', user)
         return user
     }
 }

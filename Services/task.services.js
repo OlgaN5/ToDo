@@ -1,37 +1,27 @@
-const file = require('../Utils/fs')
+const db = require('../Utils/db')
 const helper = require('../Helpers/helper')
 const {
     v4
 } = require('uuid')
 class TaskService {
     async checkTaskParameters(parameter, parameterValue) {
-        return helper.checkParameters('./tasks.json', parameter, parameterValue)
+        return helper.checkParameters('tasks', parameter, parameterValue)
     }
     async getTasks(idUser) {
-        const tasks = await file.readFile('./tasks.json')
+        const tasks = await db.read('tasks')
         return tasks.filter(item => item.idUser === idUser)
     }
     async addTask(task) {
         task.id = v4()
-        await helper.pushInSource('./tasks.json', task)
+        await helper.pushInSource('tasks', task)
         return task
     }
     async changeParameterOfTask(id, parameter, parameterValue) {
-        const tasks = await file.readFile(path)
-        const task = tasks.find(item => item[parameter] === parameterValue)
-        // const task = helper.findByParameter('./tasks.json', 'id', id)
-        task[parameter] = parameterValue
-        file.writeFile('./tasks.json', tasks) //изза этого не могу заменить на helper.findByParameter(массив будет не доступен)
-        return task
+        const updateResult = db.update('tasks',id, parameter, parameterValue)
+        return updateResult
     }
     async deleteTask(id) {
-        // const tasks = await file.readFile('./tasks.json')
-        // const taskIndex = tasks.findIndex(item => item.id === id)
-        // const deletedTask = tasks[taskIndex]
-        // tasks.splice(taskIndex, 1)
-        // file.writeFile('./tasks.json', tasks)
-        // return deletedTask
-        return await helper.deleteElementById('./tasks.json', id)
+        return await helper.deleteElementById('tasks', id)
     }
 }
 module.exports = new TaskService()

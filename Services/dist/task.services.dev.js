@@ -6,7 +6,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var file = require('../Utils/fs');
+var db = require('../Utils/db');
 
 var helper = require('../Helpers/helper');
 
@@ -27,7 +27,7 @@ function () {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", helper.checkParameters('./tasks.json', parameter, parameterValue));
+              return _context.abrupt("return", helper.checkParameters('tasks', parameter, parameterValue));
 
             case 1:
             case "end":
@@ -45,7 +45,7 @@ function () {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return regeneratorRuntime.awrap(file.readFile('./tasks.json'));
+              return regeneratorRuntime.awrap(db.read('tasks'));
 
             case 2:
               tasks = _context2.sent;
@@ -69,7 +69,7 @@ function () {
             case 0:
               task.id = v4();
               _context3.next = 3;
-              return regeneratorRuntime.awrap(helper.pushInSource('./tasks.json', task));
+              return regeneratorRuntime.awrap(helper.pushInSource('tasks', task));
 
             case 3:
               return _context3.abrupt("return", task);
@@ -84,26 +84,15 @@ function () {
   }, {
     key: "changeParameterOfTask",
     value: function changeParameterOfTask(id, parameter, parameterValue) {
-      var tasks, task;
+      var updateResult;
       return regeneratorRuntime.async(function changeParameterOfTask$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.next = 2;
-              return regeneratorRuntime.awrap(file.readFile(path));
+              updateResult = db.update('tasks', id, parameter, parameterValue);
+              return _context4.abrupt("return", updateResult);
 
             case 2:
-              tasks = _context4.sent;
-              task = tasks.find(function (item) {
-                return item[parameter] === parameterValue;
-              }); // const task = helper.findByParameter('./tasks.json', 'id', id)
-
-              task[parameter] = parameterValue;
-              file.writeFile('./tasks.json', tasks); //изза этого не могу заменить на helper.findByParameter(массив будет не доступен)
-
-              return _context4.abrupt("return", task);
-
-            case 7:
             case "end":
               return _context4.stop();
           }
@@ -118,7 +107,7 @@ function () {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return regeneratorRuntime.awrap(helper.deleteElementById('./tasks.json', id));
+              return regeneratorRuntime.awrap(helper.deleteElementById('tasks', id));
 
             case 2:
               return _context5.abrupt("return", _context5.sent);

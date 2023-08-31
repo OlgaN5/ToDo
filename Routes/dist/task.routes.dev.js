@@ -392,4 +392,36 @@ router["delete"]('/:id', validationHeader, authenticateToken, validationParam, f
     }
   }, null, null, [[0, 12]]);
 });
-module.exports = router;
+module.exports = router; // app.get('/', (req, res) => {
+//     //логика для получения данных
+//     res.send(data)
+// })
+// app.delete('/delete', (req, res) => {
+//     //логика для удаления данных
+//     res.send(deletedData)
+// })
+// //api/edit/1
+// app.put('/edit/:id', (req, res) => {
+//     //логика для изменения user по id
+//     //req.body - для получения тела
+//     //req.params -  для получения параметра id из url
+//     res.send(createdUser)
+// })
+// //api/create
+// app.post('/create', (req, res) => {
+//     //логика для добавления user
+//     //req.body - для получения тела
+//     res.send(editedData)
+// })
+// //api/editAge?23
+// app.patch('/edit', (req, res) => {
+//     //логика для редактирования возраста user, которые имеют возраст 23
+//     //req.body - для получения тела
+//     //req.query - для получения параметров после "?"
+//     res.send(editedUser)
+// })
+// const users = []
+// const user = {
+//     name: 'Ivan',
+//     age: 25
+// }

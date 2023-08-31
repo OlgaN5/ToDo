@@ -24,7 +24,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(helper.findByParameter('./users.json', 'login', login));
+              return regeneratorRuntime.awrap(helper.findByParameter('users', 'login', login));
 
             case 2:
               user = _context.sent;
