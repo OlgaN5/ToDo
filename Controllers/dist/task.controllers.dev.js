@@ -35,12 +35,12 @@ function () {
               return _context.abrupt("return", "user hasn't tasks");
 
             case 4:
-              _context.next = 6;
+              console.log("taskcontrollers getTasks");
+              _context.next = 7;
               return regeneratorRuntime.awrap(taskService.getTasks(idUser));
 
-            case 6:
+            case 7:
               tasks = _context.sent;
-              console.log(tasks);
               return _context.abrupt("return", tasks);
 
             case 9:

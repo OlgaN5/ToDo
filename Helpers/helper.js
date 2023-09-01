@@ -2,6 +2,7 @@ const db = require('../Utils/db')
 class Helpers {
     async checkParameters(path, parameter, parameterValue) {
         const source = await db.read(path)
+        console.log('helper checkParameters')
         return source.some(item => parameterValue === item[parameter])
     }
     async findByParameter(path, parameter, parameterValue) {

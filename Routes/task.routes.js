@@ -58,17 +58,17 @@ const validationHeader = [
 //get tasks
 router.get('/', validationHeader, authenticateToken, async (req, res) => {
     try {
+        console.log('tasks')
         const result = validationResult(req)
         if (result.isEmpty()) {
             const tasks = await taskController.getTasks(req.idUser.id)
+            console.log(tasks)
             res.send(tasks)
         } else {
             res.send({
                 errors: result.array()
             })
         }
-
-
     } catch (e) {
         Sentry.captureException(e)
     }

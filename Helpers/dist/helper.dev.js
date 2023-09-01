@@ -28,11 +28,12 @@ function () {
 
             case 2:
               source = _context.sent;
+              console.log('helper checkParameters');
               return _context.abrupt("return", source.some(function (item) {
                 return parameterValue === item[parameter];
               }));
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }

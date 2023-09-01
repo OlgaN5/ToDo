@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken')
 const app = require('../index')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
-const file = require('../Utils/db')
+// const file = require('../Utils/db')
+const db = require('../Utils/db')
 chai.should()
 chai.use(chaiHttp)
 const authenticateToken = require('../Utils/Authenticate')
@@ -10,24 +11,32 @@ const authenticateToken = require('../Utils/Authenticate')
 describe('test API methods task', () => {
     describe('it get all tasks of user', async () => {
         try {
-            const tasks = await file.readFile('./tasks.json')
-            const authHeader = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMyNzM4NDQ4LTM0ZGItNDlkYy05YWI2LWI3ZDM2YTk3NmM5MSIsImlhdCI6MTY5Mjk2ODMwNX0.ydDGlLWFb9H1HsP5D73A7d5zKGLSY24e2lLQ9pmUXgw'
+            const tasks = await db.read('tasks')
+            const authHeader = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyOGM3NjEwLTJjYzItNDUxNi1hOWE2LTIxODAxNzFkMGZmYyIsImlhdCI6MTY5MzU2NzQyM30.pVaUEPCkDFYhpiYWIa2ISgDIr5rqbt0nHoWthYxQmJ0'
             const token = authHeader?.split(' ')[1]
             let idUser = null
             jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
                 if (err) throw new Error('token is invalid')
                 idUser = id
-            })           
+            })
+            // console.log('test')
             const tasksUser = tasks.filter(item => item.idUser === idUser)
+            console.log(idUser)
             it('it returns tasks of user', (done) => {
-
+                console.log('test')
                 chai.request(app)
                     .get('/api/task/')
                     .set('authorization', token)
                     .end((err, res) => {
-                        if (tasksUser.length !== 0) {
-                            res.should.have.status(200)
-                            res.body.should.have.property('title')
+                       
+                        if (idUser) {                            
+                            if (tasksUser.length === 0) {
+                                res.should.have.status(200)
+                                res.text.should.be("user hasn't tasks")
+                            } else {
+                                res.should.have.status(200)
+                                res.body.should.have.property('title')
+                            }
                         } else {
                             res.should.have.status(401)
                             res.body.should.have.property('message').equal('нужен токен')

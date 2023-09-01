@@ -59,42 +59,44 @@ router.get('/', validationHeader, authenticateToken, function _callee(req, res) 
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
+          console.log('tasks');
           result = validationResult(req);
 
           if (!result.isEmpty()) {
-            _context.next = 9;
+            _context.next = 11;
             break;
           }
 
-          _context.next = 5;
+          _context.next = 6;
           return regeneratorRuntime.awrap(taskController.getTasks(req.idUser.id));
 
-        case 5:
+        case 6:
           tasks = _context.sent;
+          console.log(tasks);
           res.send(tasks);
-          _context.next = 10;
+          _context.next = 12;
           break;
 
-        case 9:
+        case 11:
           res.send({
             errors: result.array()
           });
 
-        case 10:
-          _context.next = 15;
+        case 12:
+          _context.next = 17;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 14:
+          _context.prev = 14;
           _context.t0 = _context["catch"](0);
           Sentry.captureException(_context.t0);
 
-        case 15:
+        case 17:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 14]]);
 });
 /**
  * @swagger

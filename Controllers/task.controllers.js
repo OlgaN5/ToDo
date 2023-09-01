@@ -2,10 +2,11 @@ const taskService = require('../Services/task.services')
 class TaskController {
     async getTasks(idUser) {
         if (!(await taskService.checkTaskParameters('idUser', idUser))) {
+            // console.log("taskcontrollers getTasks")
             return "user hasn't tasks"
         }
+        console.log("taskcontrollers getTasks")
         const tasks = await taskService.getTasks(idUser)
-        console.log(tasks)
         return tasks
     }
     async addTask(idUser, task) {
