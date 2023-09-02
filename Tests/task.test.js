@@ -20,15 +20,13 @@ describe('test API methods task', () => {
                 idUser = id
             })
             // console.log('test')
-            const tasksUser = tasks.filter(item => item.idUser === idUser)
-            console.log(idUser)
+            const tasksUser = tasks.filter(item => item.idUser === idUser.id)
             it('it returns tasks of user', (done) => {
                 console.log('test')
                 chai.request(app)
                     .get('/api/task/')
                     .set('authorization', token)
-                    .end((err, res) => {
-                       
+                    .end((err, res) => {                       
                         if (idUser) {                            
                             if (tasksUser.length === 0) {
                                 res.should.have.status(200)

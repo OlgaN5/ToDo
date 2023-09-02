@@ -13,7 +13,7 @@ class Db {
             connection = await helperDb.getConnection()
             const db = await helperDb.useDefaultDb(connection)
             const data = await db.collection(path).find().toArray()
-            console.log(data)
+            // console.log(data)
             return data
         } catch (e) {
             console.log(e.message)

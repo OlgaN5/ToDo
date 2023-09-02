@@ -46,25 +46,24 @@ function () {
 
             case 9:
               data = _context.sent;
-              console.log(data);
               return _context.abrupt("return", data);
 
-            case 14:
-              _context.prev = 14;
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0.message);
 
-            case 17:
-              _context.prev = 17;
+            case 16:
+              _context.prev = 16;
               connection.close();
-              return _context.finish(17);
+              return _context.finish(16);
 
-            case 20:
+            case 19:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[0, 14, 17, 20]]);
+      }, null, null, [[0, 13, 16, 19]]);
     }
   }, {
     key: "create",
