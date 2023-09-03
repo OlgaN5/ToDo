@@ -6,10 +6,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _require = require('mongodb'),
-    MongoClient = _require.MongoClient;
-
-var mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017');
+var mongoose = require('mongoose');
 
 var HelperDb =
 /*#__PURE__*/
@@ -26,7 +23,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(mongoDbClient.connect());
+              return regeneratorRuntime.awrap(mongoose.connect('mongodb://127.0.0.1:27017/ToDo'));
 
             case 2:
               return _context.abrupt("return", _context.sent);
@@ -37,27 +34,10 @@ function () {
           }
         }
       });
-    }
-  }, {
-    key: "useDefaultDb",
-    value: function useDefaultDb(connection) {
-      return regeneratorRuntime.async(function useDefaultDb$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return regeneratorRuntime.awrap(connection.db('ToDo'));
+    } // async useDefaultDb(connection) {
+    //    return await connection.db('ToDo')
+    // }
 
-            case 2:
-              return _context2.abrupt("return", _context2.sent);
-
-            case 3:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      });
-    }
   }]);
 
   return HelperDb;

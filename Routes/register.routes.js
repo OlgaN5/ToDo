@@ -52,7 +52,6 @@ router.post('/', validation, async (req, res) => {
         console.log(result)
         if (result.isEmpty()) {
             const user = await registerControllers.register(req.body)
-            console.log(user)
             res.send(user)
         } else {
             console.log('TYUIOIUYGFDFGHJKJHGF')

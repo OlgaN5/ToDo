@@ -1,15 +1,12 @@
-const {
-    MongoClient
-} = require('mongodb')
-const mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+const mongoose = require('mongoose')
 
 class HelperDb {
     async getConnection() {
-        return await mongoDbClient.connect()
+        return await mongoose.connect('mongodb://127.0.0.1:27017/ToDo')
     }
-    async useDefaultDb(connection) {
-       return await connection.db('ToDo')
-    }
+    // async useDefaultDb(connection) {
+    //    return await connection.db('ToDo')
+    // }
 }
 
 module.exports = new HelperDb()

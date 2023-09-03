@@ -32,7 +32,9 @@ function () {
                 break;
               }
 
-              return _context.abrupt("return", "user hasn't tasks");
+              return _context.abrupt("return", {
+                message: "user hasn't tasks"
+              });
 
             case 4:
               _context.next = 6;

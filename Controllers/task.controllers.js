@@ -2,7 +2,7 @@ const taskService = require('../Services/task.services')
 class TaskController {
     async getTasks(idUser) {
         if (!(await taskService.checkTaskParameters('idUser', idUser))) {
-            return "user hasn't tasks"
+            return {message: "user hasn't tasks"}
         }
         const tasks = await taskService.getTasks(idUser)
         console.log(tasks)
