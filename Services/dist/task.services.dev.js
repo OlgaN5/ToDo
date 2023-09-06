@@ -62,19 +62,20 @@ function () {
     }
   }, {
     key: "addTask",
-    value: function addTask(task) {
+    value: function addTask(idUser, task) {
       return regeneratorRuntime.async(function addTask$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
+              console.log(task);
               task.id = v4();
-              _context3.next = 3;
-              return regeneratorRuntime.awrap(helper.pushInSource('tasks', task));
-
-            case 3:
-              return _context3.abrupt("return", task);
+              _context3.next = 4;
+              return regeneratorRuntime.awrap(helper.pushInSource(idUser, 'tasks', task));
 
             case 4:
+              return _context3.abrupt("return", task);
+
+            case 5:
             case "end":
               return _context3.stop();
           }

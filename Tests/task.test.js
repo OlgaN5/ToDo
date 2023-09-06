@@ -12,8 +12,7 @@ const authHeader = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyOTY0
 const token = authHeader?.split(' ')[1]
 async function getTasksUser() {
     let connection
-    try {
-       
+    try {       
         let idUser = null
         jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
             if (err) throw new Error('token is invalid')            
@@ -30,7 +29,6 @@ async function getTasksUser() {
     } finally {
         connection.disconnect()
     }
-
 }
 describe('test API methods task', () => {
     describe('it get all tasks of user', () => {

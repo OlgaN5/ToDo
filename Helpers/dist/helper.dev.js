@@ -28,11 +28,12 @@ function () {
 
             case 2:
               source = _context.sent;
+              console.log(source);
               return _context.abrupt("return", source.some(function (item) {
                 return parameterValue === item[parameter];
               }));
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -65,13 +66,13 @@ function () {
     }
   }, {
     key: "pushInSource",
-    value: function pushInSource(path, element) {
+    value: function pushInSource(idUser, path, element) {
       return regeneratorRuntime.async(function pushInSource$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return regeneratorRuntime.awrap(db.create(path, element));
+              return regeneratorRuntime.awrap(db.create(idUser, path, element));
 
             case 2:
             case "end":

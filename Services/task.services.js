@@ -11,9 +11,10 @@ class TaskService {
         const tasks = await db.read('tasks')
         return tasks.filter(item => item.idUser === idUser)
     }
-    async addTask(task) {
+    async addTask(idUser, task) {
+        console.log(task)
         task.id = v4()
-        await helper.pushInSource('tasks', task)
+        await helper.pushInSource(idUser,'tasks', task)
         return task
     }
     async changeParameterOfTask(id, parameter, parameterValue) {

@@ -37,52 +37,57 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              _context.t0 = path;
-              _context.next = _context.t0 === 'tasks' ? 4 : _context.t0 === 'users' ? 6 : 9;
-              break;
-
-            case 4:
-              model = Task;
-              return _context.abrupt("break", 9);
-
-            case 6:
-              console.log("2222");
-              model = User;
-              return _context.abrupt("break", 9);
-
-            case 9:
-              _context.next = 11;
+              _context.next = 3;
               return regeneratorRuntime.awrap(helperDb.getConnection());
 
-            case 11:
+            case 3:
               connection = _context.sent;
-              _context.next = 14;
+              _context.t0 = path;
+              _context.next = _context.t0 === 'tasks' ? 7 : _context.t0 === 'users' ? 12 : 18;
+              break;
+
+            case 7:
+              model = Task;
+              _context.next = 10;
               return regeneratorRuntime.awrap(model.find({}));
 
-            case 14:
+            case 10:
               data = _context.sent;
-              return _context.abrupt("return", data);
+              return _context.abrupt("break", 18);
+
+            case 12:
+              console.log("2222");
+              model = User;
+              _context.next = 16;
+              return regeneratorRuntime.awrap(model.find({}));
+
+            case 16:
+              data = _context.sent;
+              return _context.abrupt("break", 18);
 
             case 18:
-              _context.prev = 18;
-              _context.t1 = _context["catch"](0);
-              console.log(_context.t1.message);
+              return _context.abrupt("return", data);
 
             case 21:
               _context.prev = 21;
-              connection.disconnect();
-              return _context.finish(21);
+              _context.t1 = _context["catch"](0);
+              console.log(_context.t1.message);
 
             case 24:
+              _context.prev = 24;
+              connection.disconnect();
+              return _context.finish(24);
+
+            case 27:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[0, 18, 21, 24]]);
+      }, null, null, [[0, 21, 24, 27]]);
     }
   }, {
     key: "create",
-    value: function create(path, data) {
+    value: function create(idUser, path, data) {
       var connection, model;
       return regeneratorRuntime.async(function create$(_context2) {
         while (1) {
@@ -102,34 +107,36 @@ function () {
               return _context2.abrupt("break", 8);
 
             case 8:
-              _context2.next = 10;
+              data.idUser = idUser;
+              console.log(data);
+              _context2.next = 12;
               return regeneratorRuntime.awrap(helperDb.getConnection());
 
-            case 10:
+            case 12:
               connection = _context2.sent;
-              _context2.next = 13;
+              _context2.next = 15;
               return regeneratorRuntime.awrap(model.create(data));
 
-            case 13:
-              _context2.next = 18;
+            case 15:
+              _context2.next = 20;
               break;
 
-            case 15:
-              _context2.prev = 15;
+            case 17:
+              _context2.prev = 17;
               _context2.t1 = _context2["catch"](0);
               console.log(_context2.t1.message);
 
-            case 18:
-              _context2.prev = 18;
+            case 20:
+              _context2.prev = 20;
               connection.disconnect();
-              return _context2.finish(18);
+              return _context2.finish(20);
 
-            case 21:
+            case 23:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, null, [[0, 15, 18, 21]]);
+      }, null, null, [[0, 17, 20, 23]]);
     } // async writeFile(path, data) {
     //     fs.writeFileSync(path, JSON.stringify(data))
     // }

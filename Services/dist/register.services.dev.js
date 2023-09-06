@@ -41,12 +41,13 @@ function () {
   }, {
     key: "createUser",
     value: function createUser(user) {
+      var id;
       return regeneratorRuntime.async(function createUser$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              user.id = v4();
-              helper.pushInSource('users', user);
+              id = v4();
+              helper.pushInSource(id, 'users', user);
               return _context2.abrupt("return", user);
 
             case 3:
