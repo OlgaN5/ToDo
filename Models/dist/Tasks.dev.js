@@ -3,13 +3,16 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
+
+var User = require('../Models/Users');
+
 var TaskSchema = new Schema({
-  id: String,
+  // id: mongoose.Schema.Types.ObjectId,
   title: String,
   isCompleted: Boolean,
   idUser: {
-    type: String // ref: 'User'
-
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 var Task = mongoose.model('Task', TaskSchema);

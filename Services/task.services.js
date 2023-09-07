@@ -5,16 +5,17 @@ const {
 } = require('uuid')
 class TaskService {
     async checkTaskParameters(parameter, parameterValue) {
-        return helper.checkParameters('tasks', parameter, parameterValue)
+        return await helper.checkParameters('tasks', parameter, parameterValue)
     }
     async getTasks(idUser) {
         const tasks = await db.read('tasks')
-        return tasks.filter(item => item.idUser === idUser)
+        return tasks.filter(item => item.idUser.toString() === idUser)
     }
     async addTask(task) {
-        task.id = v4()
-        await helper.pushInSource('tasks', task)
-        return task
+        // task.id = v4()
+        // console.log(task)
+        return await helper.pushInSource('tasks', task)
+         
     }
     async changeParameterOfTask(id, parameter, parameterValue) {
         const updateResult = db.update('tasks',id, parameter, parameterValue)

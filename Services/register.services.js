@@ -7,7 +7,7 @@ class RegisterServices {
         return await helper.checkParameters('users', parameter, parameterValue)
     }
     async createUser(user) {
-        user.id = v4()
+        // user.id = v4()
         helper.pushInSource('users', user)
         return user
     }

@@ -8,14 +8,15 @@ class LoginControllers {
             password
         } = data
         const user = await loginServices.getUser(login)
+        console.log(user)
         if (user) {
             const compareUser = await bcrypt.compare(password, user.password)
             const {
-                id
+                _id
             } = user
             if (compareUser) {
                 const token = jwt.sign({
-                    id
+                    _id
                 }, process.env.SECRET_KEY)
                 return token
             }

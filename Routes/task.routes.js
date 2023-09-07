@@ -22,23 +22,6 @@ const validationHeader = [
     header('authorization').notEmpty()
 ]
 
-// const authenficateToken = (req, res, next) => {
-//     try {
-//         const authHeader = req.headers.authorization
-//         const token = authHeader?.split(' ')[1]
-//         if (!token) res.sendStatus(401)
-//         jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
-//             if (err) throw new Error('token is invalid')
-//             req.idUser = id
-//             next()
-//         })
-//     } catch (e) {
-//         Sentry.captureException(e)
-//         res.sendStatus(403)
-//     }
-
-// }
-
 /**
  * @swagger
  * /api/task/:
@@ -60,7 +43,8 @@ router.get('/', validationHeader, authenticateToken, async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
-            const tasks = await taskController.getTasks(req.idUser.id)
+            const tasks = await taskController.getTasks(req.idUser._id)
+            console.log(req.idUser._id)
             res.send(tasks)
         } else {
             res.send({
@@ -105,9 +89,10 @@ router.get('/', validationHeader, authenticateToken, async (req, res) => {
 //add task
 router.post('/add', validationHeader, authenticateToken, validationBody, async (req, res) => {
     try {
+        // console.log(req.idUser)
         const result = validationResult(req)
         if (result.isEmpty()) {
-            const task = await taskController.addTask(req.idUser.id, req.body)
+            const task = await taskController.addTask(req.idUser._id, req.body)
             res.send(task)
         } else {
             res.send({

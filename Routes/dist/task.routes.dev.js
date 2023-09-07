@@ -18,22 +18,7 @@ var authenticateToken = require('../Utils/Authenticate');
 
 var validationBody = [body('title').notEmpty().escape().isString().trim(), body('isCompleted').notEmpty().isBoolean()];
 var validationParam = [param('id').notEmpty()];
-var validationHeader = [header('authorization').notEmpty()]; // const authenficateToken = (req, res, next) => {
-//     try {
-//         const authHeader = req.headers.authorization
-//         const token = authHeader?.split(' ')[1]
-//         if (!token) res.sendStatus(401)
-//         jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
-//             if (err) throw new Error('token is invalid')
-//             req.idUser = id
-//             next()
-//         })
-//     } catch (e) {
-//         Sentry.captureException(e)
-//         res.sendStatus(403)
-//     }
-// }
-
+var validationHeader = [header('authorization').notEmpty()];
 /**
  * @swagger
  * /api/task/:
@@ -62,39 +47,40 @@ router.get('/', validationHeader, authenticateToken, function _callee(req, res) 
           result = validationResult(req);
 
           if (!result.isEmpty()) {
-            _context.next = 9;
+            _context.next = 10;
             break;
           }
 
           _context.next = 5;
-          return regeneratorRuntime.awrap(taskController.getTasks(req.idUser.id));
+          return regeneratorRuntime.awrap(taskController.getTasks(req.idUser._id));
 
         case 5:
           tasks = _context.sent;
+          console.log(req.idUser._id);
           res.send(tasks);
-          _context.next = 10;
+          _context.next = 11;
           break;
 
-        case 9:
+        case 10:
           res.send({
             errors: result.array()
           });
 
-        case 10:
-          _context.next = 15;
+        case 11:
+          _context.next = 16;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
           Sentry.captureException(_context.t0);
 
-        case 15:
+        case 16:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 13]]);
 });
 /**
  * @swagger
@@ -134,6 +120,7 @@ router.post('/add', validationHeader, authenticateToken, validationBody, functio
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
+          // console.log(req.idUser)
           result = validationResult(req);
 
           if (!result.isEmpty()) {
@@ -142,7 +129,7 @@ router.post('/add', validationHeader, authenticateToken, validationBody, functio
           }
 
           _context2.next = 5;
-          return regeneratorRuntime.awrap(taskController.addTask(req.idUser.id, req.body));
+          return regeneratorRuntime.awrap(taskController.addTask(req.idUser._id, req.body));
 
         case 5:
           task = _context2.sent;

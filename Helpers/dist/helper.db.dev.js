@@ -23,7 +23,10 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(mongoose.connect('mongodb://127.0.0.1:27017/ToDo'));
+              return regeneratorRuntime.awrap(mongoose.connect('mongodb://127.0.0.1:27017/ToDo', {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+              }));
 
             case 2:
               return _context.abrupt("return", _context.sent);

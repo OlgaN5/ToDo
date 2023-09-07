@@ -29,7 +29,7 @@ function () {
             case 2:
               source = _context.sent;
               return _context.abrupt("return", source.some(function (item) {
-                return parameterValue === item[parameter];
+                return parameterValue === item[parameter].toString();
               }));
 
             case 4:
@@ -53,7 +53,7 @@ function () {
             case 2:
               source = _context2.sent;
               return _context2.abrupt("return", source.find(function (item) {
-                return item[parameter] === parameterValue;
+                return item[parameter].toString() === parameterValue;
               }));
 
             case 4:
@@ -74,6 +74,9 @@ function () {
               return regeneratorRuntime.awrap(db.create(path, element));
 
             case 2:
+              return _context3.abrupt("return", _context3.sent);
+
+            case 3:
             case "end":
               return _context3.stop();
           }

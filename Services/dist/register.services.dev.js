@@ -45,11 +45,11 @@ function () {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              user.id = v4();
+              // user.id = v4()
               helper.pushInSource('users', user);
               return _context2.abrupt("return", user);
 
-            case 3:
+            case 2:
             case "end":
               return _context2.stop();
           }

@@ -27,9 +27,13 @@ function () {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", helper.checkParameters('tasks', parameter, parameterValue));
+              _context.next = 2;
+              return regeneratorRuntime.awrap(helper.checkParameters('tasks', parameter, parameterValue));
 
-            case 1:
+            case 2:
+              return _context.abrupt("return", _context.sent);
+
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -50,7 +54,7 @@ function () {
             case 2:
               tasks = _context2.sent;
               return _context2.abrupt("return", tasks.filter(function (item) {
-                return item.idUser === idUser;
+                return item.idUser.toString() === idUser;
               }));
 
             case 4:
@@ -67,14 +71,13 @@ function () {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              task.id = v4();
-              _context3.next = 3;
+              _context3.next = 2;
               return regeneratorRuntime.awrap(helper.pushInSource('tasks', task));
 
-            case 3:
-              return _context3.abrupt("return", task);
+            case 2:
+              return _context3.abrupt("return", _context3.sent);
 
-            case 4:
+            case 3:
             case "end":
               return _context3.stop();
           }

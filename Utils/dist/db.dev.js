@@ -38,52 +38,61 @@ function () {
             case 0:
               _context.prev = 0;
               _context.t0 = path;
-              _context.next = _context.t0 === 'tasks' ? 4 : _context.t0 === 'users' ? 6 : 9;
+              _context.next = _context.t0 === 'tasks' ? 4 : _context.t0 === 'users' ? 6 : 8;
               break;
 
             case 4:
               model = Task;
-              return _context.abrupt("break", 9);
+              return _context.abrupt("break", 8);
 
             case 6:
-              console.log("2222");
+              // console.log("2222")
               model = User;
-              return _context.abrupt("break", 9);
+              return _context.abrupt("break", 8);
 
-            case 9:
-              _context.next = 11;
+            case 8:
+              _context.next = 10;
               return regeneratorRuntime.awrap(helperDb.getConnection());
 
-            case 11:
+            case 10:
               connection = _context.sent;
-              _context.next = 14;
+              _context.next = 13;
               return regeneratorRuntime.awrap(model.find({}));
 
-            case 14:
+            case 13:
               data = _context.sent;
+              _context.t1 = console;
+              _context.next = 17;
+              return regeneratorRuntime.awrap(model.find({}).populate('idUser'));
+
+            case 17:
+              _context.t2 = _context.sent;
+
+              _context.t1.log.call(_context.t1, _context.t2);
+
               return _context.abrupt("return", data);
 
-            case 18:
-              _context.prev = 18;
-              _context.t1 = _context["catch"](0);
-              console.log(_context.t1.message);
+            case 22:
+              _context.prev = 22;
+              _context.t3 = _context["catch"](0);
+              console.log(_context.t3.message);
 
-            case 21:
-              _context.prev = 21;
+            case 25:
+              _context.prev = 25;
               connection.disconnect();
-              return _context.finish(21);
+              return _context.finish(25);
 
-            case 24:
+            case 28:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[0, 18, 21, 24]]);
+      }, null, null, [[0, 22, 25, 28]]);
     }
   }, {
     key: "create",
     value: function create(path, data) {
-      var connection, model;
+      var connection, model, result;
       return regeneratorRuntime.async(function create$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -111,25 +120,26 @@ function () {
               return regeneratorRuntime.awrap(model.create(data));
 
             case 13:
-              _context2.next = 18;
-              break;
-
-            case 15:
-              _context2.prev = 15;
-              _context2.t1 = _context2["catch"](0);
-              console.log(_context2.t1.message);
+              result = _context2.sent;
+              console.log(result);
+              return _context2.abrupt("return", result);
 
             case 18:
               _context2.prev = 18;
-              connection.disconnect();
-              return _context2.finish(18);
+              _context2.t1 = _context2["catch"](0);
+              console.log(_context2.t1.message);
 
             case 21:
+              _context2.prev = 21;
+              connection.disconnect();
+              return _context2.finish(21);
+
+            case 24:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, null, [[0, 15, 18, 21]]);
+      }, null, null, [[0, 18, 21, 24]]);
     } // async writeFile(path, data) {
     //     fs.writeFileSync(path, JSON.stringify(data))
     // }
@@ -163,29 +173,30 @@ function () {
               connection = _context3.sent;
               _context3.next = 13;
               return regeneratorRuntime.awrap(model.updateOne({
-                id: id
+                _id: new mongoose.Types.ObjectId(id)
               }, _defineProperty({}, parameter, parameterValue)));
 
             case 13:
               updateResult = _context3.sent;
+              console.log(updateResult);
               return _context3.abrupt("return", updateResult);
 
-            case 17:
-              _context3.prev = 17;
+            case 18:
+              _context3.prev = 18;
               _context3.t1 = _context3["catch"](0);
               console.log(_context3.t1.message);
 
-            case 20:
-              _context3.prev = 20;
+            case 21:
+              _context3.prev = 21;
               connection.disconnect();
-              return _context3.finish(20);
+              return _context3.finish(21);
 
-            case 23:
+            case 24:
             case "end":
               return _context3.stop();
           }
         }
-      }, null, null, [[0, 17, 20, 23]]);
+      }, null, null, [[0, 18, 21, 24]]);
     }
   }, {
     key: "delete",
@@ -216,7 +227,7 @@ function () {
               connection = _context4.sent;
               _context4.next = 13;
               return regeneratorRuntime.awrap(model.deleteOne({
-                id: id
+                _id: new mongoose.Types.ObjectId(id)
               }));
 
             case 13:

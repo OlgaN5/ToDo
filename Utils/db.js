@@ -19,12 +19,13 @@ class Db {
                     break
 
                 case 'users':
-                    console.log("2222")
+                    // console.log("2222")
                     model = User
                     break
             }
             connection = await helperDb.getConnection()
             const data = await model.find({})
+            console.log(await model.find({}).populate('idUser'))
             return data
         } catch (e) {
             console.log(e.message)
@@ -46,7 +47,10 @@ class Db {
                     break
             }
             connection = await helperDb.getConnection()
-            await model.create(data)
+             const result = await model.create(data)
+             console.log(result)
+             return result
+            //  data
         } catch (e) {
             console.log(e.message)
         } finally {
@@ -72,10 +76,11 @@ class Db {
             }
             connection = await helperDb.getConnection()
             const updateResult = await model.updateOne({
-                id: id
+                _id: new mongoose.Types.ObjectId(id)
             }, {
                 [parameter]: parameterValue
             })
+            console.log(updateResult)
             return updateResult
         } catch (e) {
             console.log(e.message)
@@ -99,7 +104,7 @@ class Db {
             connection = await helperDb.getConnection()
             // const db = await helperDb.useDefaultDb(connection)
             const deletedResult = await model.deleteOne({
-                id: id
+                _id: new mongoose.Types.ObjectId(id)
             })
             return deletedResult
         } catch (e) {
