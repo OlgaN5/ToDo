@@ -9,9 +9,8 @@ class TaskController {
         return tasks
     }
     async addTask(idUser, task) {
-        console.log(idUser,task)
-        // task.idUser = idUser
-        return await taskService.addTask(idUser,task)
+        task.idUser = idUser
+        return await taskService.addTask(task)
     }
     async changeTitle(id, title) {
         return await taskService.changeParameterOfTask(id, 'title', title)

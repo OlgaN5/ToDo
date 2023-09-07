@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 const Task = require('../Models//Tasks')
 const User = require('../Models/Users')
 const helperDb = require('../Helpers/helper.db')
-
 // const helper = require('../Helpers/helper')
 class Db {
     async read(path) {
@@ -14,24 +13,18 @@ class Db {
         let connection
         try {
             let model
-            let data
-            connection = await helperDb.getConnection()
             switch (path) {
                 case 'tasks':
                     model = Task
-                    data = await model.find({})
-            // console.log(data.populate('idUser'))
                     break
 
                 case 'users':
                     console.log("2222")
                     model = User
-                    data = await model.find({})
                     break
             }
-            
-           
-            // console.log(data.populate('idUser'))
+            connection = await helperDb.getConnection()
+            const data = await model.find({})
             return data
         } catch (e) {
             console.log(e.message)
@@ -39,7 +32,7 @@ class Db {
             connection.disconnect()
         }
     }
-    async create(idUser, path, data) {
+    async create(path, data) {
         let connection
         try {
             let model
@@ -47,16 +40,13 @@ class Db {
                 case 'tasks':
                     model = Task
                     break
+
                 case 'users':
                     model = User
                     break
             }
-            data.idUser = idUser
-            console.log(data)
             connection = await helperDb.getConnection()
-            // const task = new Task(data)
             await model.create(data)
-        //    await task.save()
         } catch (e) {
             console.log(e.message)
         } finally {

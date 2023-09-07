@@ -7,8 +7,8 @@ class RegisterServices {
         return await helper.checkParameters('users', parameter, parameterValue)
     }
     async createUser(user) {
-        const id = v4()
-        helper.pushInSource(id, 'users', user)
+        user.id = v4()
+        helper.pushInSource('users', user)
         return user
     }
 }
