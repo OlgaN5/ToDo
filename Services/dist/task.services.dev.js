@@ -10,6 +10,8 @@ var db = require('../Utils/db');
 
 var helper = require('../Helpers/helper');
 
+var Task = require('../Models/Tasks');
+
 var TaskService =
 /*#__PURE__*/
 function () {
@@ -25,7 +27,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(helper.checkParameters('tasks', parameter, parameterValue));
+              return regeneratorRuntime.awrap(helper.checkParameters(Task, parameter, parameterValue));
 
             case 2:
               return _context.abrupt("return", _context.sent);
@@ -46,7 +48,7 @@ function () {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return regeneratorRuntime.awrap(db.read('tasks'));
+              return regeneratorRuntime.awrap(db.read(Task));
 
             case 2:
               tasks = _context2.sent;
@@ -69,7 +71,7 @@ function () {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return regeneratorRuntime.awrap(helper.pushInSource('tasks', task));
+              return regeneratorRuntime.awrap(db.create(Task, task));
 
             case 2:
               return _context3.abrupt("return", _context3.sent);
@@ -89,7 +91,7 @@ function () {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              updateResult = db.update('tasks', id, parameter, parameterValue);
+              updateResult = db.update(Task, id, parameter, parameterValue);
               return _context4.abrupt("return", updateResult);
 
             case 2:
@@ -107,7 +109,7 @@ function () {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return regeneratorRuntime.awrap(helper.deleteElementById('tasks', id));
+              return regeneratorRuntime.awrap(db["delete"](Task, id));
 
             case 2:
               return _context5.abrupt("return", _context5.sent);

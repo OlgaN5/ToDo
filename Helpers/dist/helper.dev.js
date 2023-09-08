@@ -17,14 +17,14 @@ function () {
 
   _createClass(Helpers, [{
     key: "checkParameters",
-    value: function checkParameters(path, parameter, parameterValue) {
+    value: function checkParameters(model, parameter, parameterValue) {
       var source;
       return regeneratorRuntime.async(function checkParameters$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(db.read(path));
+              return regeneratorRuntime.awrap(db.read(model));
 
             case 2:
               source = _context.sent;
@@ -41,14 +41,14 @@ function () {
     }
   }, {
     key: "findByParameter",
-    value: function findByParameter(path, parameter, parameterValue) {
+    value: function findByParameter(model, parameter, parameterValue) {
       var source;
       return regeneratorRuntime.async(function findByParameter$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return regeneratorRuntime.awrap(db.read(path));
+              return regeneratorRuntime.awrap(db.read(model));
 
             case 2:
               source = _context2.sent;
@@ -59,48 +59,6 @@ function () {
             case 4:
             case "end":
               return _context2.stop();
-          }
-        }
-      });
-    }
-  }, {
-    key: "pushInSource",
-    value: function pushInSource(path, element) {
-      return regeneratorRuntime.async(function pushInSource$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return regeneratorRuntime.awrap(db.create(path, element));
-
-            case 2:
-              return _context3.abrupt("return", _context3.sent);
-
-            case 3:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      });
-    }
-  }, {
-    key: "deleteElementById",
-    value: function deleteElementById(path, id) {
-      var deletedElement;
-      return regeneratorRuntime.async(function deleteElementById$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return regeneratorRuntime.awrap(db["delete"](path, id));
-
-            case 2:
-              deletedElement = _context4.sent;
-              return _context4.abrupt("return", deletedElement);
-
-            case 4:
-            case "end":
-              return _context4.stop();
           }
         }
       });

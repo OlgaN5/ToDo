@@ -1,10 +1,11 @@
 const helper = require('../Helpers/helper')
+const User = require('../Models/Users')
 class RegisterServices {
     async checkUserParameters(parameter, parameterValue) {
-        return await helper.checkParameters('users', parameter, parameterValue)
+        return await helper.checkParameters(User, parameter, parameterValue)
     }
     async createUser(user) {
-        helper.pushInSource('users', user)
+        helper.pushInSource(User, user)
         return user
     }
 }

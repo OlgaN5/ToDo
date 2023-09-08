@@ -4,6 +4,7 @@ class TaskController {
         if (!(await taskService.checkTaskParameters('idUser', idUser))) {
             return {message: "user hasn't tasks"}
         }
+        
         const tasks = await taskService.getTasks(idUser)
         return tasks
     }

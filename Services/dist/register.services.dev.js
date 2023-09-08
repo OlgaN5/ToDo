@@ -8,6 +8,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var helper = require('../Helpers/helper');
 
+var User = require('../Models/Users');
+
 var RegisterServices =
 /*#__PURE__*/
 function () {
@@ -23,7 +25,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(helper.checkParameters('users', parameter, parameterValue));
+              return regeneratorRuntime.awrap(helper.checkParameters(User, parameter, parameterValue));
 
             case 2:
               return _context.abrupt("return", _context.sent);
@@ -42,7 +44,7 @@ function () {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              helper.pushInSource('users', user);
+              helper.pushInSource(User, user);
               return _context2.abrupt("return", user);
 
             case 2:
