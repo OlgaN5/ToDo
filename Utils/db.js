@@ -1,8 +1,8 @@
 
 const mongoose = require('mongoose')
-const Task = require('../Models//Tasks')
-const User = require('../Models/Users')
-const helperDb = require('../Helpers/helper.db')
+const Task = require('../models/Tasks')
+const User = require('../models/Users')
+const helperDb = require('../helpers/helper.db')
 class Db {
     async read(model) {
         //path 'tasks', 'users'

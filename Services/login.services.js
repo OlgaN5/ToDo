@@ -1,5 +1,5 @@
-const helper = require('../Helpers/helper')
-const User = require('../Models/Users')
+const helper = require('../helpers/helper')
+const User = require('../models/Users')
 class LoginServices {
     async getUser(login) {
         const user = await helper.findByParameter(User, 'login', login)

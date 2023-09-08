@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const User = require('../Models/Users')
+const User = require('./Users')
 const TaskSchema = new Schema({
     title: String,
     isCompleted: Boolean,

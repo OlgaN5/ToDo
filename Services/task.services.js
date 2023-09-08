@@ -1,6 +1,6 @@
-const db = require('../Utils/db')
-const helper = require('../Helpers/helper')
-const Task = require('../Models/Tasks')
+const db = require('../utils/db')
+const helper = require('../helpers/helper')
+const Task = require('../models/Tasks')
 class TaskService {
     async checkTaskParameters(parameter, parameterValue) {
         return await helper.checkParameters(Task, parameter, parameterValue)

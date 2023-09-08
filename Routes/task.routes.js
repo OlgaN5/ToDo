@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const taskController = require('../Controllers/task.controllers')
+const taskController = require('../controllers/task.controllers')
 const Sentry = require('@sentry/node')
 const {
     body,
@@ -8,7 +8,7 @@ const {
     header,
     validationResult
 } = require('express-validator')
-const authenticateToken = require('../Utils/Authenticate')
+const authenticateToken = require('../utils/Authenticate')
 
 const validationIsCompleted = body('isCompleted').notEmpty().isBoolean()
 const validationTitle = body('title').notEmpty().escape().isString().trim()

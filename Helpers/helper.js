@@ -1,4 +1,4 @@
-const db = require('../Utils/db')
+const db = require('../utils/db')
 class Helpers {
     async checkParameters(model, parameter, parameterValue) {
         const source = await db.read(model)

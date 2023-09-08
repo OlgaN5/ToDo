@@ -1,4 +1,4 @@
-const taskService = require('../Services/task.services')
+const taskService = require('../services/task.services')
 class TaskController {
     async getTasks(idUser) {
         if (!(await taskService.checkTaskParameters('idUser', idUser))) {
