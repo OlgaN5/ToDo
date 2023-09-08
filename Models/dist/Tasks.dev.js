@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 var User = require('../Models/Users');
 
 var TaskSchema = new Schema({
-  // id: mongoose.Schema.Types.ObjectId,
   title: String,
   isCompleted: Boolean,
   idUser: {

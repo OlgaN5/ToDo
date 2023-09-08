@@ -28,24 +28,23 @@ function () {
 
             case 2:
               if (_context.sent) {
-                _context.next = 5;
+                _context.next = 4;
                 break;
               }
 
-              console.log('why');
               return _context.abrupt("return", {
                 message: "user hasn't tasks"
               });
 
-            case 5:
-              _context.next = 7;
+            case 4:
+              _context.next = 6;
               return regeneratorRuntime.awrap(taskService.getTasks(idUser));
 
-            case 7:
+            case 6:
               tasks = _context.sent;
               return _context.abrupt("return", tasks);
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -59,8 +58,7 @@ function () {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              task.idUser = idUser; // console.log(idUser,task)
-
+              task.idUser = idUser;
               _context2.next = 3;
               return regeneratorRuntime.awrap(taskService.addTask(task));
 

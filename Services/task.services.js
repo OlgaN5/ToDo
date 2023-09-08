@@ -1,8 +1,6 @@
 const db = require('../Utils/db')
 const helper = require('../Helpers/helper')
-const {
-    v4
-} = require('uuid')
+
 class TaskService {
     async checkTaskParameters(parameter, parameterValue) {
         return await helper.checkParameters('tasks', parameter, parameterValue)
@@ -12,8 +10,6 @@ class TaskService {
         return tasks.filter(item => item.idUser.toString() === idUser)
     }
     async addTask(task) {
-        // task.id = v4()
-        // console.log(task)
         return await helper.pushInSource('tasks', task)
          
     }

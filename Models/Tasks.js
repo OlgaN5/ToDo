@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const User = require('../Models/Users')
 const TaskSchema = new Schema({
-    // id: mongoose.Schema.Types.ObjectId,
     title: String,
     isCompleted: Boolean,
     idUser: {

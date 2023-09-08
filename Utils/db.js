@@ -1,12 +1,8 @@
-// const {
-//     MongoClient
-// } = require('mongodb')
-// const mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+
 const mongoose = require('mongoose')
 const Task = require('../Models//Tasks')
 const User = require('../Models/Users')
 const helperDb = require('../Helpers/helper.db')
-// const helper = require('../Helpers/helper')
 class Db {
     async read(path) {
         //path 'tasks', 'users'
@@ -19,7 +15,6 @@ class Db {
                     break
 
                 case 'users':
-                    // console.log("2222")
                     model = User
                     break
             }
@@ -50,17 +45,13 @@ class Db {
              const result = await model.create(data)
              console.log(result)
              return result
-            //  data
         } catch (e) {
             console.log(e.message)
         } finally {
             connection.disconnect()
         }
     }
-    // async writeFile(path, data) {
 
-    //     fs.writeFileSync(path, JSON.stringify(data))
-    // }
     async update(collection, id, parameter, parameterValue) {
         let connection
         try {
@@ -80,7 +71,6 @@ class Db {
             }, {
                 [parameter]: parameterValue
             })
-            console.log(updateResult)
             return updateResult
         } catch (e) {
             console.log(e.message)
@@ -102,7 +92,6 @@ class Db {
                     break
             }
             connection = await helperDb.getConnection()
-            // const db = await helperDb.useDefaultDb(connection)
             const deletedResult = await model.deleteOne({
                 _id: new mongoose.Types.ObjectId(id)
             })

@@ -8,18 +8,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// const {
-//     MongoClient
-// } = require('mongodb')
-// const mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
 var mongoose = require('mongoose');
 
 var Task = require('../Models//Tasks');
 
 var User = require('../Models/Users');
 
-var helperDb = require('../Helpers/helper.db'); // const helper = require('../Helpers/helper')
-
+var helperDb = require('../Helpers/helper.db');
 
 var Db =
 /*#__PURE__*/
@@ -46,7 +41,6 @@ function () {
               return _context.abrupt("break", 8);
 
             case 6:
-              // console.log("2222")
               model = User;
               return _context.abrupt("break", 8);
 
@@ -140,10 +134,7 @@ function () {
           }
         }
       }, null, null, [[0, 18, 21, 24]]);
-    } // async writeFile(path, data) {
-    //     fs.writeFileSync(path, JSON.stringify(data))
-    // }
-
+    }
   }, {
     key: "update",
     value: function update(collection, id, parameter, parameterValue) {
@@ -178,25 +169,24 @@ function () {
 
             case 13:
               updateResult = _context3.sent;
-              console.log(updateResult);
               return _context3.abrupt("return", updateResult);
 
-            case 18:
-              _context3.prev = 18;
+            case 17:
+              _context3.prev = 17;
               _context3.t1 = _context3["catch"](0);
               console.log(_context3.t1.message);
 
-            case 21:
-              _context3.prev = 21;
+            case 20:
+              _context3.prev = 20;
               connection.disconnect();
-              return _context3.finish(21);
+              return _context3.finish(20);
 
-            case 24:
+            case 23:
             case "end":
               return _context3.stop();
           }
         }
-      }, null, null, [[0, 18, 21, 24]]);
+      }, null, null, [[0, 17, 20, 23]]);
     }
   }, {
     key: "delete",

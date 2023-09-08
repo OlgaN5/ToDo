@@ -1,29 +1,25 @@
 "use strict";
 
-var Sentry = require('@sentry/node');
+var loginControllers = require('../Controllers/login.controllers');
 
 var express = require('express');
 
 var router = express.Router();
 
-var registerControllers = require('../Controllers/register.controllers');
+var Sentry = require('@sentry/node');
 
 var _require = require('express-validator'),
     body = _require.body,
     validationResult = _require.validationResult;
 
-var validation = [body('email').notEmpty().escape().isEmail(), body('login').notEmpty().escape().isLength({
-  min: 5
-}), body('password').notEmpty().isLength({
-  min: 6,
-  max: 15
-})];
+var validation = [body('login').notEmpty().escape(), body('password').notEmpty()];
 /**
  * @swagger
- * /api/register/:
+ * /api/login/:
  *   post:
+ *     summary: ggfdsgfdgfdfg
  *     tags: 
- *       - Register
+ *       - Login
  *     requestBody:
  *        description: task
  *        required: true
@@ -32,9 +28,6 @@ var validation = [body('email').notEmpty().escape().isEmail(), body('login').not
  *            schema:
  *              type: object
  *              properties:
- *                email: 
- *                  type: string
- *                  default: email@gmail.com
  *                login: 
  *                  type: string
  *                  default: login
@@ -50,49 +43,56 @@ var validation = [body('email').notEmpty().escape().isEmail(), body('login').not
  */
 
 router.post('/', validation, function _callee(req, res) {
-  var result, user;
+  var result, token;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           result = validationResult(req);
-          console.log(result);
 
           if (!result.isEmpty()) {
-            _context.next = 10;
+            _context.next = 9;
             break;
           }
 
-          _context.next = 6;
-          return regeneratorRuntime.awrap(registerControllers.register(req.body));
+          _context.next = 5;
+          return regeneratorRuntime.awrap(loginControllers.login(req.body));
 
-        case 6:
-          user = _context.sent;
-          res.send(user);
-          _context.next = 12;
+        case 5:
+          token = _context.sent;
+
+          if (token) {
+            console.log(token);
+            res.send({
+              token: token
+            });
+          } else {
+            res.send('token not received');
+          }
+
+          _context.next = 10;
           break;
 
-        case 10:
-          console.log('TYUIOIUYGFDFGHJKJHGF');
+        case 9:
           res.send({
             errors: result.array()
           });
 
-        case 12:
-          _context.next = 17;
+        case 10:
+          _context.next = 15;
           break;
 
-        case 14:
-          _context.prev = 14;
+        case 12:
+          _context.prev = 12;
           _context.t0 = _context["catch"](0);
           Sentry.captureException(_context.t0);
 
-        case 17:
+        case 15:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 12]]);
 });
 module.exports = router;

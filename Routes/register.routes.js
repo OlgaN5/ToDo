@@ -6,6 +6,17 @@ const {
     body,
     validationResult
 } = require('express-validator')
+
+const validation = [
+    body('email').notEmpty().escape().isEmail(),
+    body('login').notEmpty().escape().isLength({
+        min: 5
+    }),
+    body('password').notEmpty().isLength({
+        min: 6,
+        max: 15
+    })
+]
 /**
  * @swagger
  * /api/register/:
@@ -36,16 +47,7 @@ const {
  *       '401': 
  *         description: Unautorized
  */
-const validation = [
-    body('email').notEmpty().escape().isEmail(),
-    body('login').notEmpty().escape().isLength({
-        min: 5
-    }),
-    body('password').notEmpty().isLength({
-        min: 6,
-        max: 15
-    })
-]
+
 router.post('/', validation, async (req, res) => {
     try {
         const result = validationResult(req)

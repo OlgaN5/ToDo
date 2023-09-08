@@ -11,9 +11,7 @@ const authenticateToken = (req, res, next) => {
             next()
         })
     } catch (e) {
-        // console.log('catch')
         Sentry.captureException(e)
-        // res.status(403)
     }
 }
 

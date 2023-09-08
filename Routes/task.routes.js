@@ -10,13 +10,15 @@ const {
 } = require('express-validator')
 const authenticateToken = require('../Utils/Authenticate')
 
+const validationIsCompleted = body('isCompleted').notEmpty().isBoolean()
+const validationTitle = body('title').notEmpty().escape().isString().trim()
+
 const validationBody = [
-    body('title').notEmpty().escape().isString().trim(),
-    body('isCompleted').notEmpty().isBoolean()
+    validationTitle,
+    validationIsCompleted
 ]
 const validationParam = [
-    param('id').notEmpty(),
-
+    param('id').notEmpty()
 ]
 const validationHeader = [
     header('authorization').notEmpty()
@@ -136,7 +138,7 @@ router.post('/add', validationHeader, authenticateToken, validationBody, async (
  *         description: Unauthorized
  */
 //change title
-router.patch('/:id', validationHeader, authenticateToken, body('title').notEmpty().escape().trim(), async (req, res) => {
+router.patch('/:id', validationHeader, authenticateToken, validationTitle, async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
@@ -184,7 +186,7 @@ router.patch('/:id', validationHeader, authenticateToken, body('title').notEmpty
  *         description: Unauthorized
  */
 //change isCompleted
-router.patch('/:id/isCompleted', validationHeader, authenticateToken, body('isCompleted').notEmpty().isBoolean(), async (req, res) => {
+router.patch('/:id/isCompleted', validationHeader, authenticateToken, validationIsCompleted, async (req, res) => {
     try {
         const result = validationResult(req)
         if (result.isEmpty()) {
@@ -240,51 +242,3 @@ router.delete('/:id', validationHeader, authenticateToken, validationParam, asyn
 })
 
 module.exports = router
-
-
-
-
-
-
-// app.get('/', (req, res) => {
-//     //логика для получения данных
-//     res.send(data)
-// })
-
-// app.delete('/delete', (req, res) => {
-//     //логика для удаления данных
-//     res.send(deletedData)
-// })
-
-// //api/edit/1
-// app.put('/edit/:id', (req, res) => {
-//     //логика для изменения user по id
-//     //req.body - для получения тела
-//     //req.params -  для получения параметра id из url
-//     res.send(createdUser)
-// })
-
-// //api/create
-// app.post('/create', (req, res) => {
-//     //логика для добавления user
-//     //req.body - для получения тела
-//     res.send(editedData)
-// })
-
-// //api/editAge?23
-// app.patch('/edit', (req, res) => {
-//     //логика для редактирования возраста user, которые имеют возраст 23
-//     //req.body - для получения тела
-//     //req.query - для получения параметров после "?"
-//     res.send(editedUser)
-// })
-
-
-// const users = []
-
-// const user = {
-//     name: 'Ivan',
-//     age: 25
-// }
-
-

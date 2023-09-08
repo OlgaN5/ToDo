@@ -8,7 +8,6 @@ class LoginControllers {
             password
         } = data
         const user = await loginServices.getUser(login)
-        console.log(user)
         if (user) {
             const compareUser = await bcrypt.compare(password, user.password)
             const {

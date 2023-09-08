@@ -37,10 +37,7 @@ function () {
           }
         }
       });
-    } // async useDefaultDb(connection) {
-    //    return await connection.db('ToDo')
-    // }
-
+    }
   }]);
 
   return HelperDb;

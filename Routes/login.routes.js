@@ -6,6 +6,12 @@ const {
     body,
     validationResult
 } = require('express-validator')
+
+const validation = [
+    body('login').notEmpty().escape(),
+    body('password').notEmpty()
+]
+
 /**
  * @swagger
  * /api/login/:
@@ -34,10 +40,7 @@ const {
  *       '401': 
  *         description: Unautorized
  */
-const validation = [
-    body('login').notEmpty().escape(),
-    body('password').notEmpty()
-]
+
 router.post('/', validation, async (req, res) => {
     try {
         const result = validationResult(req)

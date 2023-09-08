@@ -10,9 +10,6 @@ var db = require('../Utils/db');
 
 var helper = require('../Helpers/helper');
 
-var _require = require('uuid'),
-    v4 = _require.v4;
-
 var TaskService =
 /*#__PURE__*/
 function () {

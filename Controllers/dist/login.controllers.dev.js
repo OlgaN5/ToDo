@@ -34,22 +34,21 @@ function () {
 
             case 3:
               user = _context.sent;
-              console.log(user);
 
               if (!user) {
-                _context.next = 13;
+                _context.next = 12;
                 break;
               }
 
-              _context.next = 8;
+              _context.next = 7;
               return regeneratorRuntime.awrap(bcrypt.compare(password, user.password));
 
-            case 8:
+            case 7:
               compareUser = _context.sent;
               _id = user._id;
 
               if (!compareUser) {
-                _context.next = 13;
+                _context.next = 12;
                 break;
               }
 
@@ -58,10 +57,10 @@ function () {
               }, process.env.SECRET_KEY);
               return _context.abrupt("return", token);
 
-            case 13:
+            case 12:
               return _context.abrupt("return", null);
 
-            case 14:
+            case 13:
             case "end":
               return _context.stop();
           }
