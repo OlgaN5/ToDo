@@ -1,10 +1,9 @@
-const loginControllers = require('../Controllers/login.controllers')
+const loginControllers = require('../controllers/login.controllers')
 const express = require('express')
 const router = express.Router()
-const Sentry = require('@sentry/node')
+
 const {
-    body,
-    validationResult
+    body
 } = require('express-validator')
 
 const validation = [
@@ -41,27 +40,5 @@ const validation = [
  *         description: Unautorized
  */
 
-router.post('/', validation, async (req, res) => {
-    try {
-        const result = validationResult(req)
-        if (result.isEmpty()) {
-            const token = await loginControllers.login(req.body)
-            if (token) {
-                console.log(token)
-                res.send({
-                    token
-                })
-            } else {
-                res.send('token not received')
-            }
-
-        } else {
-            res.send({
-                errors: result.array()
-            })
-        }
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.post('/', validation, loginControllers.processLogin )
 module.exports = router

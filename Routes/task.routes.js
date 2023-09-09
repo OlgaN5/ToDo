@@ -1,12 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const taskController = require('../controllers/task.controllers')
-const Sentry = require('@sentry/node')
 const {
     body,
     param,
-    header,
-    validationResult
+    header
 } = require('express-validator')
 const authenticateToken = require('../utils/Authenticate')
 
@@ -41,24 +39,7 @@ const validationHeader = [
  *         description: Unauthorized
  */
 //get tasks
-router.get('/', validationHeader, authenticateToken, async (req, res) => {
-    try {
-        const result = validationResult(req)
-        if (result.isEmpty()) {
-            const tasks = await taskController.getTasks(req.idUser._id)
-            console.log(req.idUser._id)
-            res.send(tasks)
-        } else {
-            res.send({
-                errors: result.array()
-            })
-        }
-
-
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.get('/', validationHeader, authenticateToken, taskController.processGettingTasks)
 /**
  * @swagger
  * /api/task/add:
@@ -89,22 +70,7 @@ router.get('/', validationHeader, authenticateToken, async (req, res) => {
  *         description: Unauthorized
  */
 //add task
-router.post('/add', validationHeader, authenticateToken, validationBody, async (req, res) => {
-    try {
-        // console.log(req.idUser)
-        const result = validationResult(req)
-        if (result.isEmpty()) {
-            const task = await taskController.addTask(req.idUser._id, req.body)
-            res.send(task)
-        } else {
-            res.send({
-                errors: result.array()
-            })
-        }
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.post('/add', validationHeader, authenticateToken, validationBody, taskController.processAddTask)
 
 /**
  * @swagger
@@ -138,21 +104,7 @@ router.post('/add', validationHeader, authenticateToken, validationBody, async (
  *         description: Unauthorized
  */
 //change title
-router.patch('/:id', validationHeader, authenticateToken, validationTitle, async (req, res) => {
-    try {
-        const result = validationResult(req)
-        if (result.isEmpty()) {
-            const task = await taskController.changeTitle(req.params.id, req.body.title)
-            res.send(task)
-        } else {
-            res.send({
-                errors: result.array()
-            })
-        }
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.patch('/:id', validationHeader, authenticateToken, validationTitle, taskController.processChacgeTitle)
 
 /**
  * @swagger
@@ -186,22 +138,7 @@ router.patch('/:id', validationHeader, authenticateToken, validationTitle, async
  *         description: Unauthorized
  */
 //change isCompleted
-router.patch('/:id/isCompleted', validationHeader, authenticateToken, validationIsCompleted, async (req, res) => {
-    try {
-        const result = validationResult(req)
-        if (result.isEmpty()) {
-            console.log(req.body)
-            const task = await taskController.changeisCompleted(req.params.id, req.body.isCompleted)
-            res.send(task)
-        } else {
-            res.send({
-                errors: result.array()
-            })
-        }
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.patch('/:id/isCompleted', validationHeader, authenticateToken, validationIsCompleted, taskController.processChacgeIsCompleted)
 
 /**
  * @swagger
@@ -225,20 +162,6 @@ router.patch('/:id/isCompleted', validationHeader, authenticateToken, validation
  */
 
 //delete task
-router.delete('/:id', validationHeader, authenticateToken, validationParam, async (req, res) => {
-    try {
-        const result = validationResult(req)
-        if (result.isEmpty()) {
-            const task = await taskController.deleteTask(req.params.id)
-            res.send(task)
-        } else {
-            res.send({
-                errors: result.array()
-            })
-        }
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.delete('/:id', validationHeader, authenticateToken, validationParam, taskController.processDelete)
 
 module.exports = router

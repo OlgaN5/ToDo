@@ -1,10 +1,10 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const app = require('../index')
-const db = require('../Utils/db')
+const db = require('../utils/db')
 const mongoose = require('mongoose')
-const model = require('../Models/Users')
-const helperDb = require('../Helpers/helper.db')
+const model = require('../models/Users')
+const helperDb = require('../helpers/helper.db')
 chai.should()
 chai.use(chaiHttp)
 

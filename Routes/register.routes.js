@@ -1,10 +1,8 @@
-const Sentry = require('@sentry/node')
 const express = require('express')
 const router = express.Router()
-const registerControllers = require('../Controllers/register.controllers')
+const registerControllers = require('../controllers/register.controllers')
 const {
-    body,
-    validationResult
+    body
 } = require('express-validator')
 
 const validation = [
@@ -48,22 +46,6 @@ const validation = [
  *         description: Unautorized
  */
 
-router.post('/', validation, async (req, res) => {
-    try {
-        const result = validationResult(req)
-        console.log(result)
-        if (result.isEmpty()) {
-            const user = await registerControllers.register(req.body)
-            res.send(user)
-        } else {
-            console.log('TYUIOIUYGFDFGHJKJHGF')
-            res.send({
-                errors: result.array()
-            })
-        }
-    } catch (e) {
-        Sentry.captureException(e)
-    }
-})
+router.post('/', validation, async (req, res) => await registerControllers.processRegister(req, res))
 
 module.exports = router
