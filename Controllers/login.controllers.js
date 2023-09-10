@@ -8,11 +8,31 @@ const {
 
 
 class LoginControllers {
-     processLogin = async (req, res)=> {
+    login = async (req, res) => {
         try {
             const result = validationResult(req)
             if (result.isEmpty()) {
-                const token = await this.login(req.body)
+                let token = null
+                const {
+                    login,
+                    password
+                } = req.body
+                const user = await loginServices.getUser(login)
+
+                if (user.length !== 0) {
+                    const compareUser = await bcrypt.compare(password, user[0].password)
+                    const {
+                        _id
+                    } = user[0]
+                    if (compareUser) {
+                        token = jwt.sign({
+                            _id
+                        }, process.env.SECRET_KEY)
+                        // return token
+                    }
+                }
+                // return null
+                // const token = await this.login(req.body)
                 if (token) {
                     console.log(token)
                     res.send({
@@ -29,26 +49,6 @@ class LoginControllers {
         } catch (e) {
             Sentry.captureException(e)
         }
-    }
-    async login(data) {
-        const {
-            login,
-            password
-        } = data
-        const user = await loginServices.getUser(login)
-        if (user) {
-            const compareUser = await bcrypt.compare(password, user.password)
-            const {
-                _id
-            } = user
-            if (compareUser) {
-                const token = jwt.sign({
-                    _id
-                }, process.env.SECRET_KEY)
-                return token
-            }
-        }
-        return null
     }
 }
 module.exports = new LoginControllers()

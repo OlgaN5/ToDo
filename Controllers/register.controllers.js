@@ -6,13 +6,40 @@ const {
     validationResult
 } = require('express-validator')
 class RegisterControllers {
-    async processRegister(req, res) {
+    async register(req, res) {
         try {
             const result = validationResult(req)
             console.log(result)
             if (result.isEmpty()) {
-                const user = await this.register(req.body)
-                res.send(user)
+                // const user = await this.register(req.body)
+
+                const {
+                    email,
+                    login,
+                    password
+                } = req.body
+
+                const isEmail = await registerServices.findByParameters('email', email)
+                const isLogin = await registerServices.findByParameters('login', login)
+
+                if (isEmail.length !== 0) {
+                    return res.send({
+                        message: 'email is exist'
+                    })
+                }
+                if (isLogin.length !== 0) {
+                    return res.send({
+                        message: 'login is exist'
+                    })
+                }
+
+                const hashedPassword = await bcrypt.hashSync(password, saltRounds)
+                const createdUser = await registerServices.createUser({
+                    email,
+                    login,
+                    password: hashedPassword
+                })
+                return res.send(createdUser)
             } else {
                 console.log('TYUIOIUYGFDFGHJKJHGF')
                 res.send({
@@ -23,30 +50,8 @@ class RegisterControllers {
             Sentry.captureException(e)
         }
     }
-    async register(user) {
-        const {
-            email,
-            login,
-            password
-        } = user
+    // async register(user) {
 
-        const isEmail = await registerServices.checkUserParameters('email', email)
-        const isLogin = await registerServices.checkUserParameters('login', login)
-
-        if (isEmail) {
-            return 'email is exist'
-        }
-        if (isLogin) {
-            return 'login is exist'
-        }
-
-        const hashedPassword = await bcrypt.hashSync(password, saltRounds)
-        const createdUser = await registerServices.createUser({
-            email,
-            login,
-            password: hashedPassword
-        })
-        return createdUser
-    }
+    // }
 }
 module.exports = new RegisterControllers()

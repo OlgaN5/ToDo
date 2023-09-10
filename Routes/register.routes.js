@@ -46,6 +46,6 @@ const validation = [
  *         description: Unautorized
  */
 
-router.post('/', validation, async (req, res) => await registerControllers.processRegister(req, res))
+router.post('/', validation, registerControllers.register)
 
 module.exports = router

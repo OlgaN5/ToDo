@@ -40,5 +40,5 @@ const validation = [
  *         description: Unautorized
  */
 
-router.post('/', validation, loginControllers.processLogin )
+router.post('/', validation, loginControllers.login )
 module.exports = router

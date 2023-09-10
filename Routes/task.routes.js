@@ -39,7 +39,7 @@ const validationHeader = [
  *         description: Unauthorized
  */
 //get tasks
-router.get('/', validationHeader, authenticateToken, taskController.processGettingTasks)
+router.get('/', validationHeader, authenticateToken, taskController.getTasks)
 /**
  * @swagger
  * /api/task/add:
@@ -70,7 +70,7 @@ router.get('/', validationHeader, authenticateToken, taskController.processGetti
  *         description: Unauthorized
  */
 //add task
-router.post('/add', validationHeader, authenticateToken, validationBody, taskController.processAddTask)
+router.post('/add', validationHeader, authenticateToken, validationBody, taskController.addTask)
 
 /**
  * @swagger
@@ -104,7 +104,7 @@ router.post('/add', validationHeader, authenticateToken, validationBody, taskCon
  *         description: Unauthorized
  */
 //change title
-router.patch('/:id', validationHeader, authenticateToken, validationTitle, taskController.processChacgeTitle)
+router.patch('/:id', validationHeader, authenticateToken, validationTitle, taskController.changeTitle)
 
 /**
  * @swagger
@@ -138,7 +138,7 @@ router.patch('/:id', validationHeader, authenticateToken, validationTitle, taskC
  *         description: Unauthorized
  */
 //change isCompleted
-router.patch('/:id/isCompleted', validationHeader, authenticateToken, validationIsCompleted, taskController.processChacgeIsCompleted)
+router.patch('/:id/isCompleted', validationHeader, authenticateToken, validationIsCompleted, taskController.changeisCompleted)
 
 /**
  * @swagger
@@ -162,6 +162,6 @@ router.patch('/:id/isCompleted', validationHeader, authenticateToken, validation
  */
 
 //delete task
-router.delete('/:id', validationHeader, authenticateToken, validationParam, taskController.processDelete)
+router.delete('/:id', validationHeader, authenticateToken, validationParam, taskController.deleteTask)
 
 module.exports = router
