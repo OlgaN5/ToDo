@@ -7,7 +7,7 @@ const authenticateToken = (req, res, next) => {
         if (!token)  return res.status(401).json({message:'нужен токен'})
         jwt.verify(token, process.env.SECRET_KEY, (err, id) => {
             if (err)  res.status(403).json({message:'token is invalid'})
-            req.idUser = id
+            req.idUser = id._id
             next()
         })
     } catch (e) {

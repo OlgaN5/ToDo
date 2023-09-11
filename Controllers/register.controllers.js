@@ -11,7 +11,6 @@ class RegisterControllers {
             const result = validationResult(req)
             console.log(result)
             if (result.isEmpty()) {
-                // const user = await this.register(req.body)
 
                 const {
                     email,
@@ -50,8 +49,6 @@ class RegisterControllers {
             Sentry.captureException(e)
         }
     }
-    // async register(user) {
-
-    // }
+   
 }
 module.exports = new RegisterControllers()

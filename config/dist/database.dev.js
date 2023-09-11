@@ -6,3 +6,4 @@
 //     dialect: process.env.DIALECT
 // })
 // module.exports = sequelize
+"use strict";

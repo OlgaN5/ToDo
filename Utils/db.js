@@ -2,14 +2,17 @@ const mongoose = require('mongoose')
 const Task = require('../models/Tasks')
 const User = require('../models/Users')
 const helperDb = require('../helpers/helper.db')
+const db = require('../config/database')
 class Db {
     async read(model, parameter, parameterValue) {
         let connection
         try {
+            // db.authenticate().then(() => console.log('DB connected!'))
+            //     .catch((err) => console.log('error -> ', err));
             connection = await helperDb.getConnection()
             const data = await model.find({
                 [parameter]: parameterValue
-            }) 
+            })
             return data
         } catch (e) {
             console.log(e.message)
@@ -39,7 +42,7 @@ class Db {
             }, {
                 [parameter]: parameterValue
             })
-          
+
             return updateResult
         } catch (e) {
             console.log(e.message)

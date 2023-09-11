@@ -28,11 +28,9 @@ class LoginControllers {
                         token = jwt.sign({
                             _id
                         }, process.env.SECRET_KEY)
-                        // return token
                     }
                 }
-                // return null
-                // const token = await this.login(req.body)
+               
                 if (token) {
                     console.log(token)
                     res.send({

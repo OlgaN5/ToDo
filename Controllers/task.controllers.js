@@ -8,7 +8,7 @@ class TaskController {
         try {
             const result = validationResult(req)
             if (result.isEmpty()) {
-                const tasks = await taskService.getTasks(req.idUser._id)
+                const tasks = await taskService.getTasks(req.idUser)
                 res.send(tasks)
             } else {
                 res.send({
@@ -23,7 +23,7 @@ class TaskController {
         try {
             const result = validationResult(req)
             if (result.isEmpty()) {
-                req.body.idUser = req.idUser._id
+                req.body.idUser = req.idUser
                 const task = await taskService.addTask( req.body)
                 res.send(task)
             } else {
