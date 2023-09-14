@@ -23,7 +23,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(mongoose.connect('mongodb+srv://authumn0:evdSX8SY62LfnvME@cluster0.vpivwzy.mongodb.net/', {
+              return regeneratorRuntime.awrap(mongoose.connect('mongodb+srv://authumn0:evdSX8SY62LfnvME@cluster0.vpivwzy.mongodb.net/ToDo', {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
               }));
