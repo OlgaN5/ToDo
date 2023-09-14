@@ -1,10 +1,12 @@
 
 const express = require('express')
-const Sentry = require('@sentry/node')
-const router = require('./Routes/index.routes')
 require('dotenv').config()
+
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
+const Sentry = require('@sentry/node')
+const router = require('./Routes/index.routes')
+
 const app = express()
 
 const port = process.env.PORT || 3000
