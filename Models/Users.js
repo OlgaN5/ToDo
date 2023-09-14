@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../config/database')
 
 
-const User = db.define('users', {
+const User = db.define('User', {
     id: {
         type: Sequelize.STRING,        
         autoIncrement: true,
@@ -20,7 +20,7 @@ const User = db.define('users', {
         allowNull: false
     },
 })
-module.exports = User
+export default User
 
 
 

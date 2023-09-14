@@ -1,10 +1,15 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 var Sequelize = require('sequelize');
 
 var db = require('../config/database');
 
-var User = db.define('users', {
+var User = db.define('User', {
   id: {
     type: Sequelize.STRING,
     autoIncrement: true,
@@ -22,7 +27,7 @@ var User = db.define('users', {
     allowNull: false
   }
 });
-module.exports = User; // const mongoose = require('mongoose')
+var _default = User; // const mongoose = require('mongoose')
 // const Schema = mongoose.Schema
 // const UserSchema = new Schema({
 //     login: String,
@@ -31,3 +36,5 @@ module.exports = User; // const mongoose = require('mongoose')
 // })
 // const User = mongoose.model('User', UserSchema)
 // module.exports = User
+
+exports["default"] = _default;

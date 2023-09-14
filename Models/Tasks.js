@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../config/database')
 
 
-const Task = db.define('tasks', {
+const Task = db.define('Task', {
     id: {
         type: Sequelize.STRING,
         autoIncrement: true,

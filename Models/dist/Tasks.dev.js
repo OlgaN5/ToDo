@@ -4,7 +4,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../config/database');
 
-var Task = db.define('tasks', {
+var Task = db.define('Task', {
   id: {
     type: Sequelize.STRING,
     autoIncrement: true,

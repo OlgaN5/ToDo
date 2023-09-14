@@ -3,12 +3,13 @@ const Task = require('../models/Tasks')
 const User = require('../models/Users')
 const helperDb = require('../helpers/helper.db')
 const db = require('../config/database')
+
 class Db {
     async read(model, parameter, parameterValue) {
         let connection
         try {
-
-            connection = await helperDb.getConnection()
+            // connection = await helperDb.getConnection()
+            console.log(model)
             const data = await model.find({
                 [parameter]: parameterValue
             })
@@ -16,26 +17,26 @@ class Db {
         } catch (e) {
             console.log(e.message)
         } finally {
-            connection.disconnect()
+            // connection.disconnect()
         }
     }
     async create(model, data) {
         let connection
         try {
-            connection = await helperDb.getConnection()
+            // connection = await helperDb.getConnection()
             const result = await model.create(data)
             return result
         } catch (e) {
             console.log(e.message)
         } finally {
-            connection.disconnect()
+            // connection.disconnect()
         }
     }
 
     async update(model, id, parameter, parameterValue) {
         let connection
         try {
-            connection = await helperDb.getConnection()
+            // connection = await helperDb.getConnection()
             const updateResult = await model.updateOne({
                 _id: new mongoose.Types.ObjectId(id)
             }, {
