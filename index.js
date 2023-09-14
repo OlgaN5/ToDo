@@ -1,14 +1,18 @@
-
 const express = require('express')
+require('dotenv').config()
 const Sentry = require('@sentry/node')
 const router = require('./Routes/index.routes')
-require('dotenv').config()
+
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const app = express()
+const db = require('./config/database')
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 app.listen(port, () => console.log(`server started on port ${port}`))
+
+db.authenticate().then(() => console.log('DB connected!'))
+    .catch((err) => console.log('error -> ', err));
 
 const swaggerOptions = {
     swaggerDefinition: {

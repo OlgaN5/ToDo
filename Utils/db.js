@@ -7,8 +7,7 @@ class Db {
     async read(model, parameter, parameterValue) {
         let connection
         try {
-            // db.authenticate().then(() => console.log('DB connected!'))
-            //     .catch((err) => console.log('error -> ', err));
+
             connection = await helperDb.getConnection()
             const data = await model.find({
                 [parameter]: parameterValue
